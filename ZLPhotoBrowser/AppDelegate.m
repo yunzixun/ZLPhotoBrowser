@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZLImageEditTool.h"
 
 @interface AppDelegate ()
 
@@ -17,19 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    ZLImageEditType type = ZLImageEditTypeFilter | ZLImageEditTypeClip;
+    NSLog(@"%lu, %@", (unsigned long)type, @(type).stringValue);
     return YES;
-}
-
-- (UIImage *)imageWithColor:(UIColor*)color
-{
-    CGRect rect=CGRectMake(0,0, 1, 1);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [color CGColor]);
-    CGContextFillRect(context, rect);
-    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return theImage;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
